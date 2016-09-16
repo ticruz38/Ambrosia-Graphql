@@ -1,0 +1,24 @@
+{
+  "name": "ambrosia-ts-service",
+  "version": "0.0.0",
+  "description": "a graphql service for ambrosia",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec 'ts-node' index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "graphql",
+    "node",
+    "exporess"
+  ],
+  "author": "thibaut duchene",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-plugin-react": "^6.2.2",
+    "express": "^4.14.0",
+    "express-graphql": "^0.5.4",
+    "graphql": "^0.7.0",
+    "rethinkdb": "^2.3.3"
+  }
+}

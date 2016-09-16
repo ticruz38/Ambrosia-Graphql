@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es6"
+    },
+    "files": [
+      "./typings/index.d.ts",
+      "./index.ts",
+      "./graphql-api/query/root.ts",
+      "./graphql-api/query/user.ts",
+      "./graphql-api/query/order.ts",
+      "./graphql-api/query/restaurant.ts",
+      "./graphql-api/query/location.ts",
+      "./api/restaurant.ts",
+      "./api/user.ts",
+      "./api/utils.ts"
+    ]
+}
