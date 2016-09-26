@@ -1,4 +1,4 @@
-let r = require("rethinkdb");
+const r = require("rethinkdb");
 
 //utils
 import {PromiseResult, toArrayPromiseResult, PromiseUpdateResult} from './utils';

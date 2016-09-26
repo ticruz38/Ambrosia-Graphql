@@ -155,10 +155,6 @@ export const GraphQLOrder: GraphQLObjectType = new GraphQLObjectType({
       type: new GraphQLList(GraphQLItem),
       description: 'the items in that order'
     },
-    prepayed: {
-      type: GraphQLBoolean,
-      description: 'is the order prepayed'
-    },
     payed: {
       type: GraphQLBoolean,
       description: 'is the order payed ?'

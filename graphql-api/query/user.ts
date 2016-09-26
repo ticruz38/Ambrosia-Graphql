@@ -74,16 +74,16 @@ export const GraphQLUser: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
   fields: {
     id: {
-        type: GraphQLID,
-        description: "user\'s id"
+      type: GraphQLID,
+      description: "user\'s id"
     },
     created: {
-        type: GraphQLInt,
-        description: "user\'s creation date"
+      type: GraphQLInt,
+      description: "user\'s creation date"
     },
     updated: {
-        type: GraphQLInt,
-        description: "user update date"
+      type: GraphQLInt,
+      description: "user update date"
     },
     firstName: {
       type: GraphQLString,
@@ -104,19 +104,19 @@ export const GraphQLUser: GraphQLObjectType = new GraphQLObjectType({
     orders: {
       type: new GraphQLList(SimpleOrder),
       args: {
-        pending: {type: GraphQLBoolean, description: 'only return pending orders (non treated)'},
-        first: {type: GraphQLInt}
+        pending: { type: GraphQLBoolean, description: 'only return pending orders (non treated)' },
+        first: { type: GraphQLInt }
       },
       description: 'The orders of the user',
-      resolve: (root: Object, args:{pending?:boolean, first?:number}, context: {}, {rootValue}) => getUserOrders(args, rootValue)
+      resolve: (root: Object, args: { pending?: boolean, first?: number }, context: {}, {rootValue}) => getUserOrders(args, rootValue)
     },
     restaurants: {
       type: new GraphQLList(GraphQLRestaurant),
       args: {
-        first: {type: GraphQLInt}
+        first: { type: GraphQLInt }
       },
       description: 'The restaurants of the user',
-      resolve: (root: Object, args: {first: number}, context: {}, {rootValue}) => getUserRestaurants(rootValue)
+      resolve: (root: Object, args: { first: number }, context: {}, {rootValue}) => getUserRestaurants(rootValue)
     }
   }
 });

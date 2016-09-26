@@ -6,7 +6,10 @@
         "module": "commonjs",
         "target": "es6"
     },
-    "files": [
+    "exclude": [
+        "node_modules"
+    ]
+    /*"files": [
       "./typings/index.d.ts",
       "./index.ts",
       "./graphql-api/query/root.ts",
@@ -16,6 +19,11 @@
       "./graphql-api/query/location.ts",
       "./api/restaurant.ts",
       "./api/user.ts",
-      "./api/utils.ts"
-    ]
+      "./api/utils.ts",
+      "./rethinkdb/rethinkdb.ts",
+      "./rethinkdb/seeds/json/food.ts",
+      "./rethinkdb/seeds/order.ts",
+      "./rethinkdb/seeds/restaurant.ts",
+      "./rethinkdb/seeds/user.ts"
+    ]*/
 }

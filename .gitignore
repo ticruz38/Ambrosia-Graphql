@@ -1,3 +1,6 @@
 node_modules
 typings
 dist
+rethinkdb_data
+.vscode
+.DS_STORE
