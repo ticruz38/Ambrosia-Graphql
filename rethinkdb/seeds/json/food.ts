@@ -1,4 +1,7 @@
+
+import { foodPictures } from './pictures';
 var descriptions: string[] = ['try it that\'s good for you', 'smell like teen spirit', 'spicy as hell', 'you want finish it', 'eat as much as you can', 'to drink it is to love it', 'a perfect bunch of meats', 'hell of a dream'];
+
 function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -12,6 +15,10 @@ interface meal {
   id: string
 }
 interface foodType {
+  picture: {
+    size: number[],
+    url: string,
+  },
   name: string,
   description?: string,
   id: string,
@@ -21,6 +28,7 @@ var card1: foodType[] = [{
   name: 'Pizzas',
   description: descriptions[getRandomInt(0, 8)],
   id: '_' + Math.random().toString(36).substr(2, 9),
+  picture: foodPictures[getRandomInt(0, 9)],
   meals: [{
     name: 'Margarita',
     description: descriptions[getRandomInt(0, 8)],
@@ -56,6 +64,7 @@ var card1: foodType[] = [{
   name: 'Boissons',
   description: descriptions[getRandomInt(0, 8)],
   id: '_' + Math.random().toString(36).substr(2, 9),
+  picture: foodPictures[getRandomInt(0, 9)],
   meals: [{
     name: 'Coca-Cola',
     description: descriptions[getRandomInt(0, 8)],
@@ -91,6 +100,7 @@ var card1: foodType[] = [{
   name: 'Dessert',
   description: descriptions[getRandomInt(0, 8)],
   id: '_' + Math.random().toString(36).substr(2, 9),
+  picture: foodPictures[getRandomInt(0, 9)],
   meals: [{
     name: 'Ile Flotante',
     description: descriptions[getRandomInt(0, 8)],
@@ -128,6 +138,7 @@ var card2: foodType[] = [{
   name: 'Nems',
   description: descriptions[getRandomInt(0, 8)],
   id: '_' + Math.random().toString(36).substr(2, 9),
+  picture: foodPictures[getRandomInt(0, 9)],
   meals: [{
     name: 'Au Poulet',
     description: descriptions[getRandomInt(0, 8)],
@@ -163,6 +174,7 @@ var card2: foodType[] = [{
   name: 'Boissons',
   description: descriptions[getRandomInt(0, 8)],
   id: '_' + Math.random().toString(36).substr(2, 9),
+  picture: foodPictures[getRandomInt(0, 9)],
   meals: [{
     name: 'Coca-Cola',
     description: descriptions[getRandomInt(0, 8)],
@@ -198,6 +210,7 @@ var card2: foodType[] = [{
   name: 'Dessert',
   description: descriptions[getRandomInt(0, 8)],
   id: '_' + Math.random().toString(36).substr(2, 9),
+  picture: foodPictures[getRandomInt(0, 9)],
   meals: [{
     name: 'Ile Flotante',
     description: descriptions[getRandomInt(0, 8)],

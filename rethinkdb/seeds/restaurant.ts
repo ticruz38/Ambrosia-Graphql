@@ -3,7 +3,7 @@ const rethinkdb = require('rethinkdb');
 
 import * as _ from 'lodash';
 import foods from './json/food';
-import pictures from './json/pictures';
+import {restaurantPictures, foodPictures} from './json/pictures';
 
 import {getIDs} from './order';
 //length 6
@@ -67,7 +67,7 @@ const fakeRestaurant = (userIDs: string[], geolocation: number[]) => {
     open: getRandomBoolean(),
     tags: getRandomTags(getRandomInt(0, 5)),
     schedule: getRandomSchedule(),
-    picture: pictures["background-restaurant"][getRandomInt(0, pictures["background-restaurant"].length)],
+    picture: restaurantPictures[getRandomInt(0, 6)],
     userID: userIDs[getRandomInt(0, userIDs.length)]
   };
 };

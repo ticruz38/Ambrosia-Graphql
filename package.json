@@ -22,5 +22,6 @@
     "graphql": "^0.7.0",
     "lodash": "^4.16.1",
     "rethinkdb": "^2.3.3"
-  }
+  },
+  "devDependencies": {}
 }

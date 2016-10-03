@@ -54,7 +54,7 @@ const setTablesUp = (conn: r.Connection): Promise< any[] >  => {
         /**Create userID and location secondary indexes*/
         Promise.all([
           createSecondaryIndex(conn, { table: 'restaurant', index: 'userID' }),
-          createSecondaryIndex(conn, { table: 'restaurant', index: 'location' })
+          rethinkdb.table('restaurant').indexCreate('location', { geo: true }).run(conn)
         ]).then(values => resolve(values))
       });
     }),

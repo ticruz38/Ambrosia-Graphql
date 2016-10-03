@@ -1,7 +1,8 @@
 const r = require("rethinkdb");
 
 //utils
-import {PromiseResult, toArrayPromiseResult, PromiseUpdateResult} from './utils';
+import { PromiseResult, toArrayPromiseResult, PromiseUpdateResult, hashPassword } from './utils';
+import { getIDs } from './../rethinkdb/seeds/order';
 
 interface rootValue {
   conn: Object,
@@ -11,6 +12,8 @@ interface rootValue {
 };
 
 let restaurantsQuery = r.table('restaurant');
+
+//rewrite this, strange behaviour where it works once and break the second call... see how it works on ambrosia
 let nearestRestaurantQuery = (location : number[] )  => {
   return restaurantsQuery.getNearest(r.point(location[0], location[1]), {
       index: 'location',
@@ -18,11 +21,11 @@ let nearestRestaurantQuery = (location : number[] )  => {
       maxDist: 5500000
     }).merge((row: any) => {
       return {doc: {distance: row('dist') }}
-    })
+    }).map((row: any) => row('doc'));
 }
 
-export function getRestaurants(args: {location?: number[], name?: string, open?: string, sort?: string, filter?: string[], count?: number}, rootValue: rootValue) {
-  if (args.location) nearestRestaurantQuery(args.location).map((row: any) => row('doc'));
+export function getRestaurants(args: { location?: number[], name?: string, open?: string, sort?: string, filter?: string[], count?: number }, rootValue: rootValue) {
+  restaurantsQuery = args.location ? restaurantsQuery : restaurantsQuery;
   if (args.name) {
     restaurantsQuery = restaurantsQuery.filter((restaurant: any) => {
       return restaurant('name').match(args.name)
@@ -49,7 +52,7 @@ export function getRestaurants(args: {location?: number[], name?: string, open?:
         //nothing here
     }
   }
-  if(args.filter) {
+  if(args.filter && args.filter.length) {
     restaurantsQuery = restaurantsQuery.filter((restaurant: any) => {
       return restaurant('name').match(args.filter[0])
     });
@@ -65,6 +68,7 @@ export function getRestaurants(args: {location?: number[], name?: string, open?:
   if(args.count) restaurantsQuery.limit(args.count);
 
   return toArrayPromiseResult(restaurantsQuery, rootValue);
+  ;
 }
 
 export const getRestaurant = (id: string, rootValue: rootValue) => PromiseResult(restaurantsQuery.get(id), rootValue);
@@ -85,9 +89,20 @@ export function updateRestaurant(restaurant: Object & {id: string}, rootValue: r
   return PromiseUpdateResult(query, rootValue);
 }
 
-export function getRestaurantAverageScore(id: string, rootValue: rootValue) {
-  let query = r.table('order').getAll(id, {index: 'restaurantID'}).avg('rate');
-  return PromiseResult(query, rootValue);
+function restaurantHasOrders(id: string, rootValue: rootValue): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    let query = r.table('order').getAll(id, { index: 'restaurantID' });
+    toArrayPromiseResult(query, rootValue).then(value => resolve(!!value.length));
+  })
+}
+
+export async function getRestaurantAverageScore(id: string, rootValue: rootValue): Promise<number> {
+  //check if the restaurant has order indeed
+  const hasOrders = await restaurantHasOrders(id, rootValue);
+  if( hasOrders ) {
+    let query = r.table('order').getAll(id, {index: 'restaurantID'}).avg('rate');
+    return await PromiseResult(query, rootValue);
+  }
 }
 
 export function getRestaurantComments(id: string, rootValue: rootValue) {

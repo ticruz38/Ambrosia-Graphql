@@ -26,7 +26,7 @@ export const toArrayPromiseResult = (query: any, rootValue: rootValue): Promise<
   });
 }
 
-export const PromiseResult = (query: any, rootValue: rootValue): Promise<Object> => {
+export const PromiseResult = (query: any, rootValue: rootValue): Promise< any > => {
   return new Promise((resolve, reject) => {
     query.run(rootValue.conn, (err: any, res: any) => {
       if (err) reject(err);

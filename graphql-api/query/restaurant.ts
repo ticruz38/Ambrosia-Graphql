@@ -140,7 +140,19 @@ export const GraphQLFood = new GraphQLObjectType({
       description: 'restaurant\'s description'
     },
     picture: {
-      type: GraphQLString,
+      type: new GraphQLObjectType({
+        name: 'Picture',
+        fields: {
+          url: {
+            type: GraphQLString,
+            description: 'picture url'
+          },
+          size: {
+            type: new GraphQLList(GraphQLInt),
+            description: 'image size'
+          },
+        }
+      }),
       description: 'restaurant\'s picture'
     },
     meals: {
@@ -228,8 +240,20 @@ export const GraphQLRestaurant: GraphQLObjectType = new GraphQLObjectType({
       description: 'the name of the restaurant'
     },
     picture: {
-      type: GraphQLString,
-      description: 'restaurant\'s picture'
+      type: new GraphQLObjectType({
+        name: 'Picture',
+        fields: {
+          url: {
+            type: GraphQLString,
+            description: 'picture url'
+          },
+          size: {
+            type: new GraphQLList(GraphQLInt),
+            description: 'image size'
+          },
+        }
+      }),
+    description: 'restaurant\'s picture'
     },
     reviews: {
       type: GraphQLReviews,

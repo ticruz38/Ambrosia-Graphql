@@ -17,15 +17,16 @@ const schema = new graphql.GraphQLSchema({
 const app = express();
 
 app.options('/graphql', cors())
-  .use('/graphql', cors(), function (req, res) {
-    return connect().then(conn => {
-      return graphqlHTTP({
+  .use('/graphql', cors(), async function graphQl(req, res) {
+      const conn = await connect()
+      const graph = await graphqlHTTP({
         schema: schema,
         graphiql: true,
         pretty: true,
         rootValue: { conn: conn }
       })(req, res);
-    })
+      //conn.close()
+      return graph;
   }
 );
 // checkout if database is populated
