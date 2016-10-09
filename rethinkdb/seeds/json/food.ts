@@ -24,6 +24,8 @@ interface foodType {
   id: string,
   meals: meal[],
 }
+
+
 var card1: foodType[] = [{
   name: 'Pizzas',
   description: descriptions[getRandomInt(0, 8)],

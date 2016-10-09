@@ -141,7 +141,7 @@ export const GraphQLFood = new GraphQLObjectType({
     },
     picture: {
       type: new GraphQLObjectType({
-        name: 'Picture',
+        name: 'FoodPicture',
         fields: {
           url: {
             type: GraphQLString,
