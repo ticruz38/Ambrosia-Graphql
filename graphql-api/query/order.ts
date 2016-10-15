@@ -178,12 +178,12 @@ export const GraphQLOrder: GraphQLObjectType = new GraphQLObjectType({
     user: {
       type: SimpleUser,
       description: 'user orderer',
-      resolve: (root: any, args: {}, context: {}, {rootValue}) => getUserByID(root.userID, rootValue)
+      resolve: (root: any, args: {}, context: {}, { rootValue }: { rootValue: any }) => getUserByID(root.userID, rootValue)
     },
     restaurant: {
       type: SimpleRestaurant,
       description: 'restaurant name for that particular order',
-      resolve: (root: any, args: {}, context: {}, {rootValue}) => getRestaurant(root.restaurantID, rootValue)
+      resolve: (root: any, args: {}, context: {}, { rootValue }: { rootValue: any }) => getRestaurant(root.restaurantID, rootValue)
     }
   }
 });

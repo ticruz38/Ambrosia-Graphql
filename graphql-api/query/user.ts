@@ -108,7 +108,7 @@ export const GraphQLUser: GraphQLObjectType = new GraphQLObjectType({
         first: { type: GraphQLInt }
       },
       description: 'The orders of the user',
-      resolve: (root: Object, args: { pending?: boolean, first?: number }, context: {}, {rootValue}) => getUserOrders(args, rootValue)
+      resolve: (root: Object, args: { pending?: boolean, first?: number }, context: {}, {rootValue}: {rootValue: any}) => getUserOrders(args, rootValue)
     },
     restaurants: {
       type: new GraphQLList(GraphQLRestaurant),
@@ -116,7 +116,7 @@ export const GraphQLUser: GraphQLObjectType = new GraphQLObjectType({
         first: { type: GraphQLInt }
       },
       description: 'The restaurants of the user',
-      resolve: (root: Object, args: { first: number }, context: {}, {rootValue}) => getUserRestaurants(rootValue)
+      resolve: (root: Object, args: { first: number }, context: {}, {rootValue}: {rootValue: any}) => getUserRestaurants(rootValue)
     }
   }
 });

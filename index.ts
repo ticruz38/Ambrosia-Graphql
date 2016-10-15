@@ -4,10 +4,13 @@ import * as graphql from 'graphql';
 import * as graphqlHTTP from 'express-graphql';
 import * as express from 'express';
 import * as cors from 'cors';
-import * as root from './graphql-api/query/root'
+import * as bodyparser from 'body-parser';
+import * as root from './graphql-api/query/root';
 
 import { bootstrap, connect } from './rethinkdb/bootstrap';
 
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
 const r = require('rethinkdb');
 
 const schema = new graphql.GraphQLSchema({
@@ -15,6 +18,10 @@ const schema = new graphql.GraphQLSchema({
 });
 
 const app = express();
+
+app.post('/auth', function (req, res) {
+
+})
 
 app.options('/graphql', cors())
   .use('/graphql', cors(), async function graphQl(req, res) {
